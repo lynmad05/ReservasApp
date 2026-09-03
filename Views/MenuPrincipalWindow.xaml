@@ -1,0 +1,23 @@
+﻿<Window x:Class="ReservasApp.Views.MenuPrincipalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Menú Principal - ReservasApp" Height="320" Width="320"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock x:Name="txtBienvenida" FontSize="16" FontWeight="Bold"
+                       Margin="0,0,0,20" HorizontalAlignment="Center"/>
+
+            <Button Content="Aulas (DataTable)" Height="35" Margin="0,0,0,10"
+                    Click="btnAulasDataTable_Click"/>
+            <Button Content="Aulas (Objetos)" Height="35" Margin="0,0,0,10"
+                    Click="btnAulasObjetos_Click"/>
+            <Button Content="Reservas (DataTable)" Height="35" Margin="0,0,0,10"
+                    Click="btnReservasDataTable_Click"/>
+            <Button Content="Reservas (Objetos)" Height="35" Margin="0,0,0,10"
+                    Click="btnReservasObjetos_Click"/>
+            <Button Content="Nueva Reserva" Height="35" Margin="0,0,0,10"
+                    Click="btnNuevaReserva_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
