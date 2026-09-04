@@ -1,19 +1,33 @@
-﻿<Window x:Class="ReservasApp.Views.AulasObjetosView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Aulas (Objetos)" Height="450" Width="500">
-    <Grid Margin="10">
+﻿<UserControl x:Class="ReservasApp.Views.AulasObjetosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="30">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
-            <TextBox x:Name="txtBuscarNombre" Width="200" Margin="0,0,10,0"
-         Text="{Binding FiltroNombre, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Content="Buscar" Width="80" Command="{Binding BuscarCommand}"/>
+        <TextBlock Grid.Row="0" Text="Aulas (Objetos)" Style="{StaticResource SectionTitle}"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,15">
+            <TextBox x:Name="txtBuscarNombre" Width="260" Margin="0,0,10,0"
+                     Style="{StaticResource InputTextBox}"
+                     Tag="Buscar por nombre..."
+                     Text="{Binding FiltroNombre, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Buscar" Width="100"
+                    Style="{StaticResource PrimaryButton}"
+                    Command="{Binding BuscarCommand}"/>
         </StackPanel>
 
-        <DataGrid x:Name="dgAulas" Grid.Row="1" AutoGenerateColumns="True" IsReadOnly="True" ItemsSource="{Binding Aulas}"/>
+        <DataGrid Grid.Row="2" x:Name="dgAulas"
+                  Style="{StaticResource MainDataGrid}"
+                  ItemsSource="{Binding Aulas}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding AulaId}" Width="80"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
+                <DataGridTextColumn Header="Capacidad" Binding="{Binding Capacidad}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
-</Window>
+</UserControl>

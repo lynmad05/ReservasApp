@@ -2,62 +2,75 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Nueva Reserva"
-        Height="330"
-        Width="380"
-        WindowStartupLocation="CenterScreen">
+        Height="620" Width="420"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="{StaticResource OffWhite}">
 
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="35">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- 0: header -->
+                <RowDefinition Height="Auto"/>
+                <!-- 1: label Aula -->
+                <RowDefinition Height="Auto"/>
+                <!-- 2: combo Aula -->
+                <RowDefinition Height="Auto"/>
+                <!-- 3: label Fecha -->
+                <RowDefinition Height="Auto"/>
+                <!-- 4: datepicker -->
+                <RowDefinition Height="Auto"/>
+                <!-- 5: label Hora -->
+                <RowDefinition Height="Auto"/>
+                <!-- 6: textbox Hora -->
+                <RowDefinition Height="Auto"/>
+                <!-- 7: label Motivo -->
+                <RowDefinition Height="Auto"/>
+                <!-- 8: textbox Motivo -->
+                <RowDefinition Height="Auto"/>
+                <!-- 9: botón -->
+            </Grid.RowDefinitions>
 
-        <TextBlock Text="Aula:"
-                   Grid.Row="0"
-                   Margin="0,0,0,3"/>
+            <StackPanel Grid.Row="0" Margin="0,0,0,25">
+                <TextBlock Text="📅" FontSize="30" Margin="0,0,0,8"/>
+                <TextBlock Text="Nueva Reserva" FontSize="22" FontWeight="Bold"
+                           Foreground="{StaticResource NavyPrimary}"/>
+                <TextBlock Text="Completa los datos para registrar la reserva"
+                           FontSize="12" Foreground="{StaticResource TextMuted}" Margin="0,3,0,0"/>
+            </StackPanel>
 
-        <ComboBox x:Name="cmbAula"
-                  Grid.Row="1"
-                  ItemsSource="{Binding Aulas}"
-                  DisplayMemberPath="Nombre"
-                  SelectedItem="{Binding AulaSeleccionada}"
-                  Margin="0,0,0,10"/>
+            <TextBlock Text="AULA" Style="{StaticResource FieldLabel}" Grid.Row="1"/>
+            <ComboBox x:Name="cmbAula" Grid.Row="2"
+                      ItemsSource="{Binding Aulas}"
+                      DisplayMemberPath="Nombre"
+                      SelectedItem="{Binding AulaSeleccionada}"
+                      Height="36" Margin="0,0,0,18"/>
 
-        <TextBlock Text="Fecha:"
-                   Grid.Row="2"
-                   Margin="0,0,0,3"/>
+            <TextBlock Text="FECHA" Style="{StaticResource FieldLabel}" Grid.Row="3"/>
+            <DatePicker Grid.Row="4"
+                        SelectedDate="{Binding Fecha}"
+                        Height="36" Margin="0,0,0,18"/>
 
-        <DatePicker Grid.Row="3"
-                    SelectedDate="{Binding Fecha}"
-                    Margin="0,0,0,10"/>
+            <TextBlock Text="HORA (HH:mm)" Style="{StaticResource FieldLabel}" Grid.Row="5"/>
+            <TextBox Grid.Row="6"
+                     Style="{StaticResource InputTextBox}"
+                     Text="{Binding HoraTexto}"
+                     Margin="0,0,0,18"/>
 
-        <TextBlock Text="Hora (HH:mm):"
-                   Grid.Row="4"
-                   Margin="0,0,0,3"/>
+            <TextBlock Text="MOTIVO" Style="{StaticResource FieldLabel}" Grid.Row="7"/>
+            <TextBox Grid.Row="8"
+                     Style="{StaticResource InputTextBox}"
+                     Text="{Binding Motivo}"
+                     Height="70" TextWrapping="Wrap" AcceptsReturn="True"
+                     VerticalContentAlignment="Top" Padding="10"
+                     Margin="0,0,0,20"/>
 
-        <TextBox Grid.Row="5"
-                 Text="{Binding HoraTexto}"
-                 Margin="0,0,0,10"/>
-
-        <TextBlock Text="Motivo:"
-                   Grid.Row="6"
-                   Margin="0,0,0,3"/>
-
-        <TextBox Grid.Row="7"
-                 Text="{Binding Motivo}"
-                 Height="28"
-                 Margin="0,0,0,10"/>
-
-        <Button Grid.Row="8"
-                Content="Guardar Reserva"
-                Command="{Binding GuardarCommand}"
-                Height="30"/>
-    </Grid>
+            <Button Grid.Row="9"
+                    Content="Guardar Reserva"
+                    Style="{StaticResource PrimaryButton}"
+                    Height="42" FontSize="15"
+                    Command="{Binding GuardarCommand}"/>
+        </Grid>
+    </ScrollViewer>
 </Window>

@@ -1,12 +1,9 @@
-﻿using System.Data;
-using System.Windows;
-using Microsoft.Data.SqlClient;
-using ReservasApp.Helpers;
+﻿using System.Windows.Controls;
 using ReservasApp.ViewModels;
 
 namespace ReservasApp.Views
 {
-    public partial class AulasDataTableView : Window
+    public partial class AulasDataTableView : UserControl
     {
         public AulasDataTableView()
         {
