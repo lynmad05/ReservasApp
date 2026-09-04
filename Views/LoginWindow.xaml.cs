@@ -1,7 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Microsoft.Data.SqlClient;
 using ReservasApp.Helpers;
-using ReservasApp.Views;
 
 namespace ReservasApp.Views
 {
@@ -19,7 +19,7 @@ namespace ReservasApp.Views
 
             if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(clave))
             {
-                txtMensaje.Text = "Ingresa usuario y contraseña.";
+                MostrarError("Ingresa usuario y contraseña.");
                 return;
             }
 
@@ -28,7 +28,7 @@ namespace ReservasApp.Views
                 conn.Open();
 
                 string query = "SELECT UsuarioId, NombreCompleto FROM Usuarios " +
-               "WHERE Username = @Username AND Password = @Password";
+                               "WHERE Username = @Username AND Password = @Password";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -37,13 +37,10 @@ namespace ReservasApp.Views
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read()) // hay una fila -> credenciales correctas
+                        if (reader.Read())
                         {
                             SesionActual.UsuarioId = reader.GetInt32(reader.GetOrdinal("UsuarioId"));
                             SesionActual.NombreCompleto = reader.GetString(reader.GetOrdinal("NombreCompleto"));
-
-                            MessageBox.Show($"Bienvenido, {SesionActual.NombreCompleto}!", "Acceso concedido",
-                                            MessageBoxButton.OK, MessageBoxImage.Information);
 
                             MenuPrincipalWindow menu = new MenuPrincipalWindow();
                             menu.Show();
@@ -51,11 +48,17 @@ namespace ReservasApp.Views
                         }
                         else
                         {
-                            txtMensaje.Text = "Usuario o contraseña incorrectos.";
+                            MostrarError("Usuario o contraseña incorrectos.");
                         }
                     }
                 }
-            } 
+            }
+        }
+
+        private void MostrarError(string mensaje)
+        {
+            txtMensaje.Text = mensaje;
+            txtMensaje.Visibility = Visibility.Visible;
         }
     }
 }

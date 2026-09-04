@@ -1,30 +1,57 @@
 ﻿<Window x:Class="ReservasApp.Views.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Login - ReservasApp" Height="280" Width="350"
-        WindowStartupLocation="CenterScreen">
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        Title="Iniciar sesión - ReservasApp" Height="480" Width="820"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="White">
 
-        <TextBlock Text="Iniciar sesión" FontSize="18" FontWeight="Bold"
-                   Grid.Row="0" Margin="0,0,0,15"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Usuario:" Grid.Row="1" Margin="0,0,0,3"/>
-        <TextBox x:Name="txtUsername" Grid.Row="1" Margin="0,25,0,10" Height="28"/>
+        <!-- ===== PANEL IZQUIERDO: BRANDING ===== -->
+        <Border Grid.Column="0" Background="{StaticResource NavyDark}">
+            <StackPanel VerticalAlignment="Center" Margin="40">
+                <TextBlock Text="🏫" FontSize="52" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                <TextBlock Text="ReservasApp" Foreground="White"
+                           FontSize="26" FontWeight="Bold"
+                           HorizontalAlignment="Center" TextAlignment="Center"/>
+                <TextBlock Text="Sistema de gestión de aulas y reservas"
+                           Foreground="#8FA5C4" FontSize="13"
+                           HorizontalAlignment="Center" TextAlignment="Center"
+                           TextWrapping="Wrap" Margin="0,10,0,0"/>
+            </StackPanel>
+        </Border>
 
-        <TextBlock Text="Contraseña:" Grid.Row="2" Margin="0,0,0,3"/>
-        <PasswordBox x:Name="txtPassword" Grid.Row="2" Margin="0,25,0,10" Height="28"/>
+        <!-- ===== PANEL DERECHO: FORMULARIO ===== -->
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="60,0">
 
-        <Button x:Name="btnIngresar" Content="Ingresar" Grid.Row="3"
-                Height="32" Margin="0,10,0,0" Click="btnIngresar_Click"/>
+            <TextBlock Text="Bienvenido de nuevo" FontSize="24" FontWeight="Bold"
+                       Foreground="{StaticResource NavyPrimary}" Margin="0,0,0,5"/>
+            <TextBlock Text="Ingresa tus credenciales para continuar"
+                       FontSize="13" Foreground="{StaticResource TextMuted}"
+                       Margin="0,0,0,30"/>
 
-        <TextBlock x:Name="txtMensaje" Grid.Row="4" Foreground="Red"
-                   Margin="0,10,0,0" TextWrapping="Wrap"/>
+            <TextBlock Text="USUARIO" Style="{StaticResource FieldLabel}"/>
+            <TextBox x:Name="txtUsername" Style="{StaticResource InputTextBox}"
+                     Margin="0,0,0,18"/>
+
+            <TextBlock Text="CONTRASEÑA" Style="{StaticResource FieldLabel}"/>
+            <PasswordBox x:Name="txtPassword" Style="{StaticResource InputPasswordBox}"
+                         Margin="0,0,0,10"/>
+
+            <TextBlock x:Name="txtMensaje" Foreground="{StaticResource DangerRed}"
+                       FontSize="12" TextWrapping="Wrap" Margin="0,0,0,15"
+                       Visibility="Collapsed"/>
+
+            <Button x:Name="btnIngresar" Content="Ingresar"
+                    Style="{StaticResource PrimaryButton}"
+                    Height="42" FontSize="15"
+                    Click="btnIngresar_Click"/>
+
+        </StackPanel>
     </Grid>
 </Window>

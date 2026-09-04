@@ -11,29 +11,26 @@ namespace ReservasApp.Views
             txtBienvenida.Text = $"Hola, {SesionActual.NombreCompleto}";
         }
 
-        private void btnAulasDataTable_Click(object sender, RoutedEventArgs e)
+        private void Sidebar_NavigationRequested(object sender, string vista)
         {
-            new AulasDataTableView().Show();
-        }
+            if (vista == "NuevaReserva")
+            {
+                var nuevaReserva = new NuevaReservaView(SesionActual.UsuarioId);
+                nuevaReserva.Owner = this;
+                nuevaReserva.ShowDialog();
+                return;
+            }
 
-        private void btnAulasObjetos_Click(object sender, RoutedEventArgs e)
-        {
-            new AulasObjetosView().Show();
-        }
+            Sidebar.ActiveView = vista;
 
-        private void btnReservasDataTable_Click(object sender, RoutedEventArgs e)
-        {
-            new ReservasDataTableView().Show();
-        }
-
-        private void btnReservasObjetos_Click(object sender, RoutedEventArgs e)
-        {
-            new ReservasObjetosView().Show();
-        }
-
-        private void btnNuevaReserva_Click(object sender, RoutedEventArgs e)
-        {
-            new NuevaReservaView(SesionActual.UsuarioId).Show();
+            ContentArea.Content = vista switch
+            {
+                "AulasDataTable" => new AulasDataTableView(),
+                "AulasObjetos" => new AulasObjetosView(),
+                "ReservasDataTable" => new ReservasDataTableView(),
+                "ReservasObjetos" => new ReservasObjetosView(),
+                _ => ContentArea.Content
+            };
         }
     }
 }

@@ -1,23 +1,30 @@
 ﻿<Window x:Class="ReservasApp.Views.MenuPrincipalWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Menú Principal - ReservasApp" Height="320" Width="320"
-        WindowStartupLocation="CenterScreen">
-    <Grid Margin="20">
-        <StackPanel VerticalAlignment="Center">
-            <TextBlock x:Name="txtBienvenida" FontSize="16" FontWeight="Bold"
-                       Margin="0,0,0,20" HorizontalAlignment="Center"/>
+        xmlns:local="clr-namespace:ReservasApp.Views"
+        Title="ReservasApp - Menú Principal" Height="650" Width="1100"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource OffWhite}">
 
-            <Button Content="Aulas (DataTable)" Height="35" Margin="0,0,0,10"
-                    Click="btnAulasDataTable_Click"/>
-            <Button Content="Aulas (Objetos)" Height="35" Margin="0,0,0,10"
-                    Click="btnAulasObjetos_Click"/>
-            <Button Content="Reservas (DataTable)" Height="35" Margin="0,0,0,10"
-                    Click="btnReservasDataTable_Click"/>
-            <Button Content="Reservas (Objetos)" Height="35" Margin="0,0,0,10"
-                    Click="btnReservasObjetos_Click"/>
-            <Button Content="Nueva Reserva" Height="35" Margin="0,0,0,10"
-                    Click="btnNuevaReserva_Click"/>
-        </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <local:SidebarMenu x:Name="Sidebar" Grid.Column="0"
+                            NavigationRequested="Sidebar_NavigationRequested"/>
+
+        <ContentControl x:Name="ContentArea" Grid.Column="1">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="👋" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock x:Name="txtBienvenida" FontSize="26" FontWeight="Bold"
+                           Foreground="{StaticResource NavyPrimary}"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="Selecciona una opción del menú para comenzar"
+                           FontSize="14" Foreground="{StaticResource TextMuted}"
+                           Margin="0,10,0,0" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </ContentControl>
     </Grid>
 </Window>
